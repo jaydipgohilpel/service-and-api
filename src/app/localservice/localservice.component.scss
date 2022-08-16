@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+th,td{
+    border: 2px solid rgb(221, 128, 89) !important;
+    padding: 2px 0px 2px 13px !important;
+    border-radius: 5px ;
+    padding-right: 30px !important;
+}
+// th{
+//     background-color: rgb(221, 128, 89) !important;
+//     color: aliceblue;
+// }
+td:hover{
+    border-radius: 0px !important;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

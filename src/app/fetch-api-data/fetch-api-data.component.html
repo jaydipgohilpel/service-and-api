@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+ <h3>get data from https://jsonplaceholder.typicode.com/users API</h3>
+ 
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>Website</th>
+      <th>Company Name</th>
+    </tr>
+    <tr *ngFor="let i of apidata">
+      <td>{{i.id}}</td>
+      <td>{{i.name}}</td>
+      <td>{{i.username}}</td>
+      <td>{{i.email}}</td>
+      <td>{{i.address.suite}},{{i.address.street}},{{i.address.city}}zio code-{{i.address.zipcode}}</td>
+      <td>{{i.phone}}</td>
+      <td>{{i.website}}</td>
+      <td>{{i.company.name}}</td>
+    </tr>
+  </table>
+ 
+</body>
+
+</html>
