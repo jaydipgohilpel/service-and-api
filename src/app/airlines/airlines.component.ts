@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { AllServiceService } from '../service/all-service.service';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { MatSort, Sort } from '@angular/material/sort';
+import { MatSort, Sort ,MatSortModule} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatPaginatorModule } from '@angular/material/paginator';
+
 // import { MaterialExampleModule } from './../../material.module';
 
 // export interface PeriodicElement {
@@ -35,6 +36,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 export class AirlinesComponent implements OnInit, AfterViewInit {
   mobiledata: any;
   dataSource: any;
+  pageSize = 5;
   displayedColumns: string[] = [
     'id',
     'title',
@@ -45,21 +47,42 @@ export class AirlinesComponent implements OnInit, AfterViewInit {
     'rating',
     'discountPercentage',
     'description',
+    'images',
   ];
   @ViewChild(MatPaginator)
   paginator: MatPaginator | undefined;
+
+  @ViewChild(MatSort) sort: MatSort | undefined;
+
   constructor(private http: AllServiceService) {}
 
   ngOnInit() {
     this.http.getApiData().subscribe((data) => {
       this.mobiledata = data;
-      // this.dataSource.sort = this.sort;
+    
       console.log(this.mobiledata.products);
       this.dataSource = new MatTableDataSource(this.mobiledata.products);
       // this.dataSource = this.mobiledata.products;
+   
+      this.dataSource.sort = this.sort;
+      //title assecnding order
+      const sortState: Sort = {active: 'title', direction: 'asc'};
+      this.dataSource.sort.active = sortState.active;
+      this.dataSource.sort.direction = sortState.direction;
+      this.dataSource.sort.sortChange.emit(sortState);
+  
 
+      this.dataSource.sortingDataAccessor = (data:any, sortHeaderId:any) => data[sortHeaderId].toLocaleLowerCase();
       this.dataSource.paginator = this.paginator;
     });
   }
   ngAfterViewInit() {}
+
+
+
+  applyFilter(event: Event) {
+    const filterValue =( event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
 }

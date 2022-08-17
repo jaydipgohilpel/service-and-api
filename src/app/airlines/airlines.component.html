@@ -1,67 +1,81 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+</mat-form-field>
+<table mat-table [dataSource]="dataSource" matSort   class="mat-elevation-z8">
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
-  <!-- Position Column -->
+  <!--  Column -->
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef>Id.</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Id.</th>
     <td mat-cell *matCellDef="let element">{{ element.id }}</td>
   </ng-container>
 
-  <!-- Name Column -->
+  <!--  Column -->
   <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef>Title</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header >Title</th>
     <td mat-cell *matCellDef="let element">{{ element.title }}</td>
   </ng-container>
 
-  <!-- Weight Column -->
+  <!--  Column -->
   <ng-container matColumnDef="brand">
-    <th mat-header-cell *matHeaderCellDef>brand</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>brand</th>
     <td mat-cell *matCellDef="let element">{{ element.brand }}</td>
   </ng-container>
 
-  <!-- Symbol Column -->
+  <!--  Column -->
   <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef>price</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>price</th>
     <td mat-cell *matCellDef="let element">{{ element.price }}</td>
   </ng-container>
 
-  <!-- Symbol Column -->
+  <!--  Column -->
   <ng-container matColumnDef="category">
-    <th mat-header-cell *matHeaderCellDef>category</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>category</th>
     <td mat-cell *matCellDef="let element">{{ element.category }}</td>
   </ng-container>
 
-  <!-- Symbol Column -->
+  <!--  Column -->
   <ng-container matColumnDef="stock">
-    <th mat-header-cell *matHeaderCellDef>stock</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>stock</th>
     <td mat-cell *matCellDef="let element">{{ element.stock }}</td>
   </ng-container>
 
-  <!-- Symbol Column -->
+  <!--  Column -->
   <ng-container matColumnDef="rating">
-    <th mat-header-cell *matHeaderCellDef>rating</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>rating</th>
     <td mat-cell *matCellDef="let element">{{ element.rating }}</td>
   </ng-container>
 
-  <!-- Symbol Column -->
+  <!--  Column -->
   <ng-container matColumnDef="discountPercentage">
-    <th mat-header-cell *matHeaderCellDef>discountPercentage</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>discountPercentage</th>
     <td mat-cell *matCellDef="let element">{{ element.discountPercentage }}</td>
   </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="description">
+  <!--  Column -->
+  <ng-container matColumnDef="description" >
     <th mat-header-cell *matHeaderCellDef>description</th>
-    <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+    <td mat-cell *matCellDef="let element" width="400px" style="padding-right: 20px;">{{ element.description }}</td>
+  </ng-container>
+
+  <!--  Column -->
+  <ng-container matColumnDef="images">
+    <th mat-header-cell *matHeaderCellDef>Images</th>
+
+    <td mat-cell *matCellDef="let element" style="
+    padding: 0px;">
+      <span *ngFor="let i of element.images">
+        <a [href]=i> <img [src]="i" width="90px" height="70px" style="margin: 2px;" /></a>
+      </span>
+    </td>
+
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
-<mat-paginator
-  [pageSizeOptions]="[5, 10, 20]"
-  showFirstLastButtons
-  aria-label="Select page of periodic elements"
->
+<mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+  aria-label="Select page of periodic elements">
 </mat-paginator>
