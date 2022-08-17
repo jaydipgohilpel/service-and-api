@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { FetchApiDataComponent } from './fetch-api-data/fetch-api-data.component';
 import { AirlinesComponent } from './airlines/airlines.component'
 import { HttpClientModule } from '@angular/common/http';
-// import { MaterialExampleModule } from '../material.module';
-import {MatTableModule} from '@angular/material/table'
-import {MatSortModule} from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table'
+import { MatSortModule } from '@angular/material/sort';
 import { LocalserviceComponent } from './localservice/localservice.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 
 @NgModule({
   declarations: [
@@ -25,8 +26,9 @@ import { LocalserviceComponent } from './localservice/localservice.component';
     BrowserAnimationsModule,
     MatTableModule,
     MatSortModule,
-    // MaterialExampleModule
-  
+    MatPaginatorModule,
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]
