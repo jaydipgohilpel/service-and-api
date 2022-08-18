@@ -1,10 +1,17 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ChangeDetectorRef,
+  AfterViewInit,
+} from '@angular/core';
 import { AllServiceService } from '../service/all-service.service';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { MatSort, Sort ,MatSortModule} from '@angular/material/sort';
+import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatDialogModule} from '@angular/material/dialog';
 
 // import { MaterialExampleModule } from './../../material.module';
 
@@ -33,10 +40,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
   templateUrl: './airlines.component.html',
   styleUrls: ['./airlines.component.scss'],
 })
-export class AirlinesComponent implements OnInit, AfterViewInit {
+export class AirlinesComponent implements OnInit {
   mobiledata: any;
   dataSource: any;
   pageSize = 5;
+
   displayedColumns: string[] = [
     'id',
     'title',
@@ -54,35 +62,101 @@ export class AirlinesComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort | undefined;
 
-  constructor(private http: AllServiceService) {}
+  constructor(
+    private changeRef: ChangeDetectorRef,
+    private http: AllServiceService,
+    private _liveAnnouncer: LiveAnnouncer
+  ) {}
 
   ngOnInit() {
     this.http.getApiData().subscribe((data) => {
       this.mobiledata = data;
-    
+
       console.log(this.mobiledata.products);
       this.dataSource = new MatTableDataSource(this.mobiledata.products);
       // this.dataSource = this.mobiledata.products;
-   
+
       this.dataSource.sort = this.sort;
-      //title assecnding order
-      const sortState: Sort = {active: 'title', direction: 'asc'};
+      //default title assecnding order
+      const sortState: Sort = { active: 'title', direction: 'asc' };
       this.dataSource.sort.active = sortState.active;
       this.dataSource.sort.direction = sortState.direction;
       this.dataSource.sort.sortChange.emit(sortState);
-  
+      // console.log(data);
 
-      this.dataSource.sortingDataAccessor = (data:any, sortHeaderId:any) => data[sortHeaderId].toLocaleLowerCase();
+      // this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: any) =>
+      //   this.lowercase(typeof data[sortHeaderId]);
+
       this.dataSource.paginator = this.paginator;
     });
   }
-  ngAfterViewInit() {}
+  lowercase(type: any) {
+   
+    if (type == 'number') {
+    
 
-
-
-  applyFilter(event: Event) {
-    const filterValue =( event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+      this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: any) =>
+        data[sortHeaderId];
+      this.dataSource.sort = this.sort;
+    } else {
+      this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: any) =>
+        data[sortHeaderId].toLocaleLowerCase();
+    }
   }
 
+  announceSortChange(sortState: Sort) {
+    this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: any) =>
+      this.lowercase(typeof data[sortHeaderId]);
+    // if (sortState.direction) {
+    //   this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    //   console.log('if');
+    // } else {
+    //   this._liveAnnouncer.announce('Sorting cleared');
+    //   console.log('else');
+    // }
+  }
+  sortColumn(event: Sort) {
+    // debugger;
+    if (event.active === 'title') {
+      let products = this.mobiledata.products;
+      if (event.direction === 'asc') {
+        products.sort((a: any, b: any) => {
+          if (a.title.toLowerCase() < b.title.toLowerCase()) {
+            this.dataSource.sortingDataAccessor = (
+              data: any,
+              sortHeaderId: any
+            ) => data[sortHeaderId].toLocaleLowerCase();
+            return -1;
+          }
+          if (a.title.toLowerCase() > b.title.toLowerCase()) {
+            this.dataSource.sortingDataAccessor = (
+              data: any,
+              sortHeaderId: any
+            ) => data[sortHeaderId].toLocaleLowerCase();
+            return 1;
+          }
+          return 0;
+        });
+      } else {
+        products.sort((a: any, b: any) => {
+          if (a.title.toLowerCase() > b.title.toLowerCase()) {
+            return -1;
+          }
+          if (a.title.toLowerCase() < b.title.toLowerCase()) {
+            return 1;
+          }
+          return 0;
+        });
+      }
+      this.dataSource.data = products;
+      this.changeRef.detectChanges();
+    }
+  }
+  //filter
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }
+
+

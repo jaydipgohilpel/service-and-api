@@ -2,62 +2,64 @@
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
 </mat-form-field>
-<table mat-table [dataSource]="dataSource" matSort   class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+  class="mat-elevation-z8  table table-striped table-hover">
+
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
   <!--  Column -->
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Id.</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="id">Id.</th>
     <td mat-cell *matCellDef="let element">{{ element.id }}</td>
   </ng-container>
 
   <!--  Column -->
   <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header >Title</th>
-    <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="title">Title</th>
+    <td mat-cell *matCellDef="let element" class="pr-10">{{ element.title.toString() }}</td>
   </ng-container>
 
   <!--  Column -->
   <ng-container matColumnDef="brand">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>brand</th>
-    <td mat-cell *matCellDef="let element">{{ element.brand }}</td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="brand">brand</th>
+    <td mat-cell *matCellDef="let element" class="pr-10">{{ element.brand }}</td>
   </ng-container>
 
   <!--  Column -->
   <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>price</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="price">price</th>
     <td mat-cell *matCellDef="let element">{{ element.price }}</td>
   </ng-container>
 
   <!--  Column -->
   <ng-container matColumnDef="category">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>category</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="category">category</th>
     <td mat-cell *matCellDef="let element">{{ element.category }}</td>
   </ng-container>
 
   <!--  Column -->
   <ng-container matColumnDef="stock">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>stock</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="stock">stock</th>
     <td mat-cell *matCellDef="let element">{{ element.stock }}</td>
   </ng-container>
 
   <!--  Column -->
   <ng-container matColumnDef="rating">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>rating</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="rating">rating</th>
     <td mat-cell *matCellDef="let element">{{ element.rating }}</td>
   </ng-container>
 
   <!--  Column -->
   <ng-container matColumnDef="discountPercentage">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>discountPercentage</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="discountPercentage">discount(%)</th>
     <td mat-cell *matCellDef="let element">{{ element.discountPercentage }}</td>
   </ng-container>
 
   <!--  Column -->
-  <ng-container matColumnDef="description" >
+  <ng-container matColumnDef="description">
     <th mat-header-cell *matHeaderCellDef>description</th>
-    <td mat-cell *matCellDef="let element" width="400px" style="padding-right: 20px;">{{ element.description }}</td>
+    <td mat-cell *matCellDef="let element" width="350px" style="padding-right: 10px;">{{ element.description }}</td>
   </ng-container>
 
   <!--  Column -->
@@ -75,6 +77,9 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+  </tr>
 </table>
 <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
   aria-label="Select page of periodic elements">
