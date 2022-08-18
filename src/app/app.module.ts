@@ -12,13 +12,16 @@ import { LocalserviceComponent } from './localservice/localservice.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MaterialExampleModule} from './../material.module';
-
+import { DialogContentExampleDialog, MobileComponent } from './mobile/mobile.component';
+import {MatDialogModule} from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
     FetchApiDataComponent,
     AirlinesComponent,
     LocalserviceComponent,
+    MobileComponent,
+    DialogContentExampleDialog,
   ],
   imports: [
     BrowserModule,
@@ -29,8 +32,8 @@ import {MaterialExampleModule} from './../material.module';
     MatSortModule,
     MatPaginatorModule,
     MatFormFieldModule,
-    MaterialExampleModule
-   
+    MaterialExampleModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

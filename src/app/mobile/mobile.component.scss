@@ -1,0 +1,23 @@
+table {
+  width: 100%;
+}
+
+th {
+  padding-right: 10px ;
+  font-weight: bold;
+}
+
+.pr-10
+{
+  // word-wrap:break-word !important;
+  // padding-right: 10px;
+}
+.plr-0
+{
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+th.mat-sort-header-sorted {
+  color: black;
+}
+

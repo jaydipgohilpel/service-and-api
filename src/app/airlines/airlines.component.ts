@@ -11,7 +11,7 @@ import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import {MatDialogModule} from '@angular/material/dialog';
+
 
 // import { MaterialExampleModule } from './../../material.module';
 
@@ -91,9 +91,9 @@ export class AirlinesComponent implements OnInit {
     });
   }
   lowercase(type: any) {
-   
+
     if (type == 'number') {
-    
+
 
       this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: any) =>
         data[sortHeaderId];
