@@ -10,7 +10,7 @@
 
 <body>
  <h3>get data from https://jsonplaceholder.typicode.com/users API</h3>
- 
+
   <table>
     <tr>
       <th>Id</th>
@@ -22,7 +22,7 @@
       <th>Website</th>
       <th>Company Name</th>
     </tr>
-    <tr *ngFor="let i of apidata">
+    <tr *ngFor="let i of apiData">
       <td>{{i.id}}</td>
       <td>{{i.name}}</td>
       <td>{{i.username}}</td>
@@ -33,7 +33,7 @@
       <td>{{i.company.name}}</td>
     </tr>
   </table>
- 
+
 </body>
 
 </html>

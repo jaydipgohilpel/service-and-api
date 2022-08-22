@@ -1,22 +1,10 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ChangeDetectorRef,
-  AfterViewInit,
-  Inject,
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AllServiceService } from '../service/all-service.service';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { ImageModelComponent } from '../image-model/image-model.component';
 
 export interface DialogData {
   image: string;
@@ -27,7 +15,7 @@ export interface DialogData {
   styleUrls: ['./mobile.component.scss'],
 })
 export class MobileComponent implements OnInit {
-  mobiledata: any;
+  mobileData: any;
   dataSource: any;
   pageSize = 5;
 
@@ -47,21 +35,15 @@ export class MobileComponent implements OnInit {
   paginator: MatPaginator | undefined;
 
   @ViewChild(MatSort) sort: MatSort | undefined;
-
-  constructor(
-    private changeRef: ChangeDetectorRef,
-    private http: AllServiceService,
-    private _liveAnnouncer: LiveAnnouncer,
-    public dialog: MatDialog
-  ) {}
+  // private changeRef: ChangeDetectorRef,
+  constructor(private http: AllServiceService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.http.getApiData().subscribe((data) => {
-      this.mobiledata = data;
+      this.mobileData = data;
 
-      console.log(this.mobiledata.products);
-      this.dataSource = new MatTableDataSource(this.mobiledata.products);
-      // this.dataSource = this.mobiledata.products;
+      console.log(this.mobileData.products);
+      this.dataSource = new MatTableDataSource(this.mobileData.products); // Or this.dataSource = this.mobileData.products;
 
       this.dataSource.sort = this.sort;
       //default title assecnding order
@@ -69,14 +51,10 @@ export class MobileComponent implements OnInit {
       this.dataSource.sort.active = sortState.active;
       this.dataSource.sort.direction = sortState.direction;
       this.dataSource.sort.sortChange.emit(sortState);
-
-      // this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: any) =>
-      //   this.lowercase(typeof data[sortHeaderId]);
-
       this.dataSource.paginator = this.paginator;
     });
   }
-  lowercase(type: any) {
+  lowerCase(type: any) {
     if (type == 'number') {
       this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: any) =>
         data[sortHeaderId];
@@ -88,7 +66,7 @@ export class MobileComponent implements OnInit {
   }
   announceSortChange(sortState: Sort) {
     this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: any) =>
-      this.lowercase(typeof data[sortHeaderId]);
+      this.lowerCase(typeof data[sortHeaderId]);
   }
 
   //filter
@@ -96,21 +74,13 @@ export class MobileComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
+  public imageModelDisplay = false;
   //image dialoag model
-  openDialog(url: String) {
-    const dialogRef = this.dialog.open(DialogContentExampleDialog, {
-      data: { image: url },
+  openAlertDialog(url: String) {
+    const dialogRef = this.dialog.open(ImageModelComponent, {
+      data: {
+        imageUrl: url,
+      },
     });
   }
-}
-@Component({
-  selector: 'dialog-content-example-dialog',
-  templateUrl: 'dialog-content-example-dialog.html',
-})
-export class DialogContentExampleDialog {
-  constructor(
-    public dialogRef: MatDialogRef<DialogContentExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) {}
 }

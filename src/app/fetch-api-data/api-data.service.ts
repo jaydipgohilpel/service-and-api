@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http'
 export class ApiDataService {
 
   constructor(private http:HttpClient) {   }
-  getapidata()
+  getApiData()
     {
       let url='https://jsonplaceholder.typicode.com/users';
       return this.http.get(url);

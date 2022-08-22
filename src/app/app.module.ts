@@ -12,8 +12,9 @@ import { LocalserviceComponent } from './localservice/localservice.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MaterialExampleModule} from './../material.module';
-import { DialogContentExampleDialog, MobileComponent } from './mobile/mobile.component';
+import { MobileComponent } from './mobile/mobile.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { ImageModelComponent } from './image-model/image-model.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     AirlinesComponent,
     LocalserviceComponent,
     MobileComponent,
-    DialogContentExampleDialog,
+    ImageModelComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,11 +6,11 @@ import { ApiDataService } from './api-data.service'
   styleUrls: ['./fetch-api-data.component.scss']
 })
 export class FetchApiDataComponent implements OnInit {
-  apidata: any;
+  apiData: any;
   constructor(private data: ApiDataService) {
-    this.data.getapidata().subscribe(userdata => {
-      console.log(userdata);
-      this.apidata = userdata;
+    this.data.getApiData().subscribe(userData => {
+      console.log(userData);
+      this.apiData = userData;
     })
   }
   ngOnInit(): void {

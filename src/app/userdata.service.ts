@@ -7,7 +7,7 @@ import { Title } from '@angular/platform-browser';
 export class UserdataService {
 
   constructor() { }
-  getdata() {
+  getData() {
 
     return [
       {
@@ -49,9 +49,9 @@ export class UserdataService {
       }
     ]
   }
-  gettitle()
+  getTitle()
   {
     let admin='Web service';
-    return admin; 
+    return admin;
   }
 }
