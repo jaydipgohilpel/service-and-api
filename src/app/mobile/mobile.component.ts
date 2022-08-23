@@ -42,7 +42,6 @@ export class MobileComponent implements OnInit {
     this.http.getApiData().subscribe((data) => {
       this.mobileData = data;
 
-      console.log(this.mobileData.products);
       this.dataSource = new MatTableDataSource(this.mobileData.products); // Or this.dataSource = this.mobileData.products;
 
       this.dataSource.sort = this.sort;
@@ -83,4 +82,10 @@ export class MobileComponent implements OnInit {
       },
     });
   }
+//select row from table
+  selectRow(record:any)
+  {
+   console.log(record);
+  }
+
 }

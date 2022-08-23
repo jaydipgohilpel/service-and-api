@@ -15,6 +15,7 @@ import {MaterialExampleModule} from './../material.module';
 import { MobileComponent } from './mobile/mobile.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ImageModelComponent } from './image-model/image-model.component';
+import { MobileSingleRecordComponent } from './mobile-single-record/mobile-single-record.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +24,7 @@ import { ImageModelComponent } from './image-model/image-model.component';
     LocalserviceComponent,
     MobileComponent,
     ImageModelComponent,
+    MobileSingleRecordComponent,
   ],
   imports: [
     BrowserModule,

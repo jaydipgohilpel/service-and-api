@@ -1,18 +1,24 @@
 mat-dialog-content {
   overflow: hidden;
-  height: fit-content;
-  margin: 0;
-  padding: 0 12px;
-  max-height: 84vh;
-  width: 100%;
-max-width: 700px;
+
+  // margin: 0;
+  // padding: 0 12px;
+  max-height: 70vh;
+  width: 450px;
+  height: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
 
 body {
   overflow: hidden;
-h2 {
-  margin-bottom: 8px;
-}
+
+  h2 {
+    margin-bottom: 8px;
+  }
 }
