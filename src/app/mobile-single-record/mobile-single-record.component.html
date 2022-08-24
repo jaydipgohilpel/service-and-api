@@ -1,44 +1,72 @@
 <h1>Mobile Record</h1>
 
-<table *ngFor="let e of record">
+<!-- <table *ngFor="let e of record">
   <tr>
-    <th>Id :</th>
+    <th>Id </th>
     <td>{{e.id}}</td>
   </tr>
   <tr>
-    <th>brand :</th>
+    <th>brand </th>
     <td>{{e.brand}}</td>
   </tr>
   <tr>
-    <th>price :</th>
+    <th>price </th>
     <td>{{e.price}}</td>
   </tr>
   <tr>
-    <th>category :</th>
+    <th>category </th>
     <td>{{e.category}}</td>
   </tr>
   <tr>
-    <th>stock :</th>
+    <th>stock </th>
     <td>{{e.stock}}</td>
   </tr>
   <tr>
-    <th>rating :</th>
+    <th>rating </th>
     <td>{{e.rating}}</td>
   </tr>
   <tr>
-    <th>discount(%) :</th>
+    <th>discount(%) </th>
     <td>{{e.discountPercentage}}</td>
   </tr>
   <tr>
-    <th>discount(%) :</th>
+    <th>description </th>
     <td>{{e.description}}</td>
   </tr>
   <tr>
     <th>Images</th>
     <td> <span *ngFor="let i of e.images">
-        <img [src]="i" width="70px" height="70px" style="margin: 2px;"  />
+        <img [src]="i" width="70px" height="70px" style="margin:2px;"  />
       </span></td>
   </tr>
 
+</table> -->
+
+<table *ngIf="record.length>0">
+  <tr>
+    <th>Id </th>
+    <th>brand </th>
+    <th>price </th>
+    <th>category </th>
+    <th>stock </th>
+    <th>rating </th>
+    <th>discount(%) </th>
+    <th>description </th>
+    <th>Images</th>
+  </tr>
+  <tr *ngFor="let e of record">
+    <td>{{e.id}}</td>
+    <td>{{e.brand}}</td>
+    <td>{{e.price}}</td>
+    <td>{{e.category}}</td>
+    <td>{{e.stock}}</td>
+    <td>{{e.rating}}</td>
+    <td>{{e.discountPercentage}}</td>
+    <td>{{e.description}}</td>
+    <td> <span *ngFor="let i of e.images">
+        <img [src]="i" width="70px" height="70px" style="margin:2px;" />
+      </span></td>
+  </tr>
 </table>
-<h4 *ngIf="record==0">Record Not found</h4>
+
+<h4 *ngIf="record.length<=0">Record Not found</h4>
