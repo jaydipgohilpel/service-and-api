@@ -30,6 +30,7 @@ export class MobileComponent implements OnInit {
     'discountPercentage',
     'description',
     'images',
+    'action'
   ];
   @ViewChild(MatPaginator)
   paginator: MatPaginator | undefined;
@@ -81,11 +82,6 @@ export class MobileComponent implements OnInit {
         imageUrl: url,
       },
     });
-  }
-//select row from table
-  selectRow(record:any)
-  {
-   console.log(record);
   }
 
 }

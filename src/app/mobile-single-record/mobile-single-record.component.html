@@ -1,13 +1,44 @@
-<table>
+<h1>Mobile Record</h1>
+
+<table *ngFor="let e of record">
   <tr>
-    <th>Mobile Record</th>
+    <th>Id :</th>
+    <td>{{e.id}}</td>
   </tr>
   <tr>
-    <th></th>
-    <td></td>
+    <th>brand :</th>
+    <td>{{e.brand}}</td>
   </tr>
   <tr>
-    <th></th>
-    <td></td>
+    <th>price :</th>
+    <td>{{e.price}}</td>
   </tr>
+  <tr>
+    <th>category :</th>
+    <td>{{e.category}}</td>
+  </tr>
+  <tr>
+    <th>stock :</th>
+    <td>{{e.stock}}</td>
+  </tr>
+  <tr>
+    <th>rating :</th>
+    <td>{{e.rating}}</td>
+  </tr>
+  <tr>
+    <th>discount(%) :</th>
+    <td>{{e.discountPercentage}}</td>
+  </tr>
+  <tr>
+    <th>discount(%) :</th>
+    <td>{{e.description}}</td>
+  </tr>
+  <tr>
+    <th>Images</th>
+    <td> <span *ngFor="let i of e.images">
+        <img [src]="i" width="70px" height="70px" style="margin: 2px;"  />
+      </span></td>
+  </tr>
+
 </table>
+<h4 *ngIf="record==0">Record Not found</h4>

@@ -1,12 +1,10 @@
 <div>Get Data from service<h1>All Mobiles Data</h1>
 </div>
-<mat-form-field appearance="standard" >
+<mat-form-field appearance="standard">
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
 </mat-form-field>
-<mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
-  aria-label="Select page of periodic elements">
-</mat-paginator>
+
 <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
   class="mat-elevation-z8  table table-striped table-hover">
 
@@ -74,19 +72,25 @@
         <img [src]="i" width="70px" height="70px" style="margin: 2px;" (click)="openAlertDialog(i)" />
       </span>
 
-         <!-- <span >
-        <img [src]="'../../assets/youtube-banner.jpg'" width="70px" height="70px" style="margin: 2px;" (click)="openAlertDialog(src )" />
-      </span> -->
-      <span>
-       <a href="#?id={{element.id}} " target="blank"> <button (click)="selectRow(element.id)" >Select Row</button></a>
-      </span>
     </td>
 
   </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>action</th>
+    <td mat-cell *matCellDef="let element"> <span>
+      <a [routerLink]="['singleMobileRecord']" [queryParams]="{id: element.id}" target="_blank"
+        routerLinkActive="active"><button>Open
+          Data</button></a>
+    </span></td>
+  </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   <tr class="mat-row" *matNoDataRow>
     <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
   </tr>
 </table>
-
+<mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+  aria-label="Select page of periodic elements">
+</mat-paginator>
