@@ -42,7 +42,7 @@
 
 </table> -->
 
-<table *ngIf="record.length>0">
+<table *ngIf="record?.length>0">
   <tr>
     <th>Id </th>
     <th>brand </th>
@@ -69,4 +69,4 @@
   </tr>
 </table>
 
-<h4 *ngIf="record.length<=0">Record Not found</h4>
+<h4 *ngIf="record?.length<=0">Record Not found</h4>
