@@ -17,6 +17,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ImageModelComponent } from './image-model/image-model.component';
 import { MobileSingleRecordComponent } from './mobile-single-record/mobile-single-record.component';
 import { HomeComponent } from './home/home.component';
+import { ObservableSubComponent } from './observable-sub/observable-sub.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { HomeComponent } from './home/home.component';
     ImageModelComponent,
     MobileSingleRecordComponent,
     HomeComponent,
+    ObservableSubComponent,
 
 
   ],
